@@ -1,40 +1,85 @@
-<div class="container">
-    <h1>Root Cause Analysis (Ishikawa)</h1>
-    <br>
-    <br>
-    <h6>A diagram of fishbone or an Ishikawa diagram helps us to identify the root causes of a problem or risk and
-        develop solutions to those
-        problems. It is shaped like a fish skeleton, with the problem statement at the head and the causes branching off
-        like bones. Fishbone diagrams can be a helpful tool for teams to brainstorm and identify the root causes of a
-        problem. They can also be used to track progress over time and ensure that all possible causes of a problem have
-        been considered. In this article, we will study a fishbone diagram in detail, its components, and the steps to
-        create a fishbone diagram.</h6>
-    <br>
-    <section id="phases">
-        <div class="svg-container">
-            <section id="image-container">
-                <img src="assets/images/fishbone.png" alt="Ishikawa" id="build-smart-image">
-            </section>
-            <br>
-            <br>
-            <nb-card>
-                <nb-card-body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Cause Analysis (Ishikawa)</title>
+    
+    <!-- Chargement du style Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Chargement des icônes Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    
+    <!-- Styles CSS personnalisés (facultatif, à ajouter selon vos besoins) -->
+    <style>
+        /* Vos styles CSS personnalisés ici */
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Section Root Cause Analysis -->
+        <section id="root-cause-analysis">
+            <div class="card mx-auto mb-4">
+                <div class="card-body">
+                    <h1 class="card-title">Root Cause Analysis (Ishikawa)</h1>
+                    <br><br>
+                    <div class="content-container1">
+                        <h6 class="expandable">
+                            A diagram of fishbone or an Ishikawa diagram helps us to identify the root causes of a problem or risk and develop solutions to those problems. It is shaped like a fish skeleton, with the problem statement at the head and the causes branching off like bones. Fishbone diagrams can be a helpful tool for teams to brainstorm and identify the root causes of a problem. They can also be used to track progress over time and ensure that all possible causes of a problem have been considered. In this article, we will study a fishbone diagram in detail, its components, and the steps to create a fishbone diagram.
+                        </h6>
+                        <span class="show-more">Show more</span>
+                    </div>
+                    <br><br>
+                    <div class="svg-container">
+                        <h5 class="card-title">View Diagram</h5>
+                        <!-- Icône de l'appareil photo Bootstrap -->
+                        <i class="bi bi-camera bi-3x" style="cursor: pointer;" data-toggle="modal" data-target="#rcaModal"></i>
+                        <!-- Modal -->
+                        <div class="modal fade" id="rcaModal" tabindex="-1" aria-labelledby="rcaModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="rcaModalLabel">Root Cause Analysis Example</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="assets/images/rcaex.png" class="img-fluid" alt="Ishikawa">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Stepper -->
+       <section id="stepper-section" class="my-5">
+            <div class="card mx-auto mb-4">
+                <div class="card-body">
                     <nb-stepper orientation="horizontal">
-                        <nb-step [label]="labelOne">
+                        <nb-step [label]="'First step'">
                             <ng-template #labelOne>First step</ng-template>
                             <h4>Why (Purpose)</h4>
                             <br>
                             <h6 class="lorem">
                                 Root Cause Analysis (RCA) using the Ishikawa (Fishbone) diagram is a technique used to
                                 identify the underlying causes of a problem. The purpose is to systematically break down
-                                potential causes of an issue to pinpoint the root cause, thereby enabling effective
-                                solutions and preventing recurrence.
+                                potential causes of an issue to pinpoint the root cause, thereby enabling effective solutions
+                                and preventing recurrence.
                             </h6>
                             <br>
                             <button nbButton disabled nbStepperNext>prev</button>
                             <button nbButton nbStepperNext>next</button>
                         </nb-step>
-                        <nb-step [label]="labelTwo">
+                        <nb-step [label]="'Second step'">
                             <ng-template #labelTwo>Second step</ng-template>
                             <h4>How (Implementation Process)</h4>
                             <br>
@@ -42,32 +87,35 @@
                                 1. Identify the Problem: Clearly define the problem or effect you are investigating.
                             </h6>
                             <br>
-                            <h6 class="lorem">2. Create the Fishbone Diagram: Draw a large arrow pointing to the right;
-                                this
-                                represents the main problem. Draw lines branching off the main arrow for each category
-                                of potential causes.</h6>
+                            <h6 class="lorem">
+                                2. Create the Fishbone Diagram: Draw a large arrow pointing to the right; this represents the
+                                main problem. Draw lines branching off the main arrow for each category of potential causes.
+                            </h6>
                             <br>
-                            <h6 class="lorem">3. Determine Major Categories: Common categories include People,
-                                Processes, Equipment,
-                                Materials, Environment, and Management. These are the main bones of the fish.</h6>
+                            <h6 class="lorem">
+                                3. Determine Major Categories: Common categories include People, Processes, Equipment,
+                                Materials, Environment, and Management. These are the main bones of the fish.
+                            </h6>
                             <br>
-                            <h6 class="lorem">4. Brainstorm Causes: For each category, brainstorm potential causes
-                                and add them as
-                                smaller branches off each main category line.</h6>
+                            <h6 class="lorem">
+                                4. Brainstorm Causes: For each category, brainstorm potential causes and add them as smaller
+                                branches off each main category line.
+                            </h6>
                             <br>
-                            <h6 class="lorem">5. Analyze and Identify Root Causes: Review the diagram, analyze the
-                                relationships
-                                between causes, and identify the root causes contributing most significantly to the
-                                problem.</h6>
+                            <h6 class="lorem">
+                                5. Analyze and Identify Root Causes: Review the diagram, analyze the relationships between
+                                causes, and identify the root causes contributing most significantly to the problem.
+                            </h6>
                             <br>
-                            <h6 class="lorem">6. Prioritize and Address Root Causes: Develop action plans to
-                                address the identified
-                                root causes.</h6>
+                            <h6 class="lorem">
+                                6. Prioritize and Address Root Causes: Develop action plans to address the identified root
+                                causes.
+                            </h6>
                             <br>
                             <button nbButton nbStepperPrevious>prev</button>
                             <button nbButton nbStepperNext>next</button>
                         </nb-step>
-                        <nb-step label="Third step">
+                        <nb-step [label]="'Third step'">
                             <h4>Tools and Techniques</h4>
                             <br>
                             <h6 class="lorem">
@@ -80,89 +128,385 @@
                             </h6>
                             <br>
                             <h6 class="lorem">
-                                Data Collection and Analysis: Use data to verify and validate the causes identified
-                                during brainstorming.
+                                Data Collection and Analysis: Use data to verify and validate the causes identified during
+                                brainstorming.
                             </h6>
                             <br>
                             <h6 class="lorem">
-                                Pareto Analysis: Focus on the causes that have the most significant impact, often
-                                illustrated by the Pareto principle (80/20 rule).
+                                Pareto Analysis: Focus on the causes that have the most significant impact, often illustrated
+                                by the Pareto principle (80/20 rule).
                             </h6>
                             <br>
                             <button nbButton nbStepperPrevious>prev</button>
                             <button nbButton nbStepperNext>next</button>
                         </nb-step>
-                        <nb-step [label]="labelFour">
-                            <ng-template #labelFour>Fourth step</ng-template>
+                        <nb-step [label]="'Fourth step'">
                             <h4>What If (Testing and Validation)</h4>
                             <br>
                             <h6 class="lorem">
-                                Hypothesis Testing: Implement temporary solutions based on identified root causes and
-                                observe the results. </h6>
-                            <br>
-                            <h6 class="lorem">
-                                Pilot Projects: Test solutions on a small scale before full implementation. </h6>
-                            <br>
-                            <h6 class="lorem">
-                                Monitoring and Measurement: Continuously monitor the outcomes to ensure the problem is
-                                resolved. </h6>
-                            <br>
-                            <h6 class="lorem">
-                                Feedback Loops: Gather feedback from stakeholders to validate the effectiveness of the
-                                solutions. </h6>
-                            <br>
-                            <button nbButton nbStepperPrevious>prev</button>
-                            <button nbButton nbStepperNext>next</button>
-                        </nb-step>
-                        <nb-step [label]="labelFive">
-                            <ng-template #labelFive>Fifth step</ng-template>
-                            <h4>Continuous Improvement</h4>
-                            <br>
-                            <h6 class="lorem">
-                                Regular Reviews: Conduct periodic reviews of processes and outcomes to identify new
-                                issues or improvements. </h6>
-                            <br>
-                            <h6 class="lorem">
-                                Training and Development: Educate employees on root cause analysis and problem-solving
-                                techniques. </h6>
-                            <br>
-                            <h6 class="lorem">
-                                Standardization: Incorporate successful solutions into standard operating procedures.
+                                Hypothesis Testing: Implement temporary solutions based on identified root causes and observe
+                                the results.
                             </h6>
                             <br>
                             <h6 class="lorem">
-                                Continuous Learning: Stay updated on best practices and new techniques in root cause
-                                analysis and quality management. </h6>
+                                Pilot Projects: Test solutions on a small scale before full implementation.
+                            </h6>
+                            <br>
+                            <h6 class="lorem">
+                                Monitoring and Measurement: Continuously monitor the outcomes to ensure the problem is resolved.
+                            </h6>
+                            <br>
+                            <h6 class="lorem">
+                                Feedback Loops: Gather feedback from stakeholders to validate the effectiveness of the
+                                solutions.
+                            </h6>
                             <br>
                             <button nbButton nbStepperPrevious>prev</button>
                             <button nbButton disabled nbStepperNext>next</button>
                         </nb-step>
                     </nb-stepper>
-                </nb-card-body>
-            </nb-card>
-            <br>
-            <br>
-        </div>
-        <h1>Example of an Ishikawa diagram </h1>
-        <div class="svg-container">
-            <br>
-            <br>
-            <section id="image-container">
-                <img src="assets/images/rcaex.png" alt="Ishikawa" id="build-smart-image">
-            </section>
-            <br>
+                </div>
+            </div>
+        </section>
 
-        </div>
-        <h6>
-            The Fishbone diagram example provided illustrates a structured approach to analyzing cause and effect
-            relationships within a production process. It visually organizes potential causes into categories that
-            branch out from a central problem statement, resembling the skeletal structure of a fish. This diagram
-            format enables teams to systematically explore various factors contributing to issues or inefficiencies
-            in production. By categorizing causes such as equipment, materials, methods, people, and environment,
-            the diagram highlights interdependencies and helps prioritize areas for improvement. Its clear and
-            organized layout aids in fostering team collaboration, brainstorming, and developing targeted solutions
-            to enhance process efficiency and quality control. The diagram's simplicity yet comprehensive coverage
-            of potential factors makes it a valuable tool for continuous improvement initiatives in industrial
-            settings.</h6>
-    </section>
-</div>
+        <!-- Section Ishikawa Diagram -->
+        <section id="ishikawa-diagram">
+            <div class="card mx-auto mb-4">
+                <div class="card-body">
+                    <h1 class="card-title">Ishikawa Diagram Example</h1>
+                    <br><br>
+                    <div class="content-container">
+                        <h6 class="expandable">
+                            The Fishbone diagram example provided illustrates a structured approach to analyzing cause and effect relationships within a production process. It visually organizes potential causes into categories that branch out from a central problem statement, resembling the skeletal structure of a fish. This diagram format enables teams to systematically explore various factors contributing to issues or inefficiencies in production. By categorizing causes such as equipment, materials, methods, people, and environment, the diagram highlights interdependencies and helps prioritize areas for improvement. Its clear and organized layout aids in fostering team collaboration, brainstorming, and developing targeted solutions to enhance process efficiency and quality control. The diagram's simplicity yet comprehensive coverage of potential factors makes it a valuable tool for continuous improvement initiatives in industrial settings.
+                        </h6>
+                        <span class="show-more">Show more</span>
+                    </div>
+                    <div class="svg-container">
+                        <h5 class="card-title">View Diagram</h5>
+                        <!-- Icône de l'appareil photo Bootstrap -->
+                        <i class="bi bi-camera bi-3x" style="cursor: pointer;" data-toggle="modal" data-target="#fishboneModal"></i>
+                        <!-- Modal -->
+                        <div class="modal fade" id="fishboneModal" tabindex="-1" aria-labelledby="fishboneModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="fishboneModalLabel">View Diagram</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="assets/images/fishbone.png" class="img-fluid" alt="Ishikawa">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Limitations and Acceptations -->
+        <section id="limitations-acceptations">
+            <div class="card mx-auto mb-4">
+                <div class="card-body">
+                    <h1 class="card-title">Limitations and Acceptations</h1>
+                    <br><br>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Advantages</th>
+                                    <th scope="col">Limitations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="bi bi-check tick"></i> Solves recurring issues effectively.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Requires skilled facilitators for effective sessions.</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-check tick"></i> Improves decision-making based on data-driven insights.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Depends heavily on thorough data collection and analysis.</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-check tick"></i> Facilitates resolution of complex problems.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Can be time-consuming during data collection and analysis.</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-check tick"></i> Encourages cross-functional collaboration.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Requires regular data updates to remain effective.</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-check tick"></i> Improves customer satisfaction by identifying and eliminating recurring issues.</td>
+                                    <td><i class="bi bi-x-circle error"></i> May not capture all external factors influencing a problem.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        
+
+
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <section id="rca-tutorial">
+                            <h2>RCA-Tutoriel</h2> 
+
+
+
+
+
+
+
+
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3>Why</h3>
+                                    <h4 class="expandable">Understanding the root causes allows organizations to implement lasting solutions, reducing the likelihood of recurring issues and improving overall efficiency. RCA enables a proactive approach to problem-solving by focusing on underlying factors rather than just addressing symptoms.</h4>
+                                    <span class="show-more">Show more</span>
+                                </div>
+                                <div class="svg-container">
+                                    
+                                    <!-- Image de taille moyenne pour afficher dans la page -->
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkwuzhHSDoz2wN-WclpAlPE2yvNHoEuMN_UWiM5nJ9_ZCNZQnh5bH61AMwlZ6PPa5YzvU&usqp=CAU" class="img-fluid"  style="cursor: pointer;" onclick="showLargeImage()">
+                                    <!-- Script pour afficher l'image en grand -->
+                                    <script>
+                                        function showLargeImage() {
+                                            // Charger l'image en grand
+                                            document.getElementById('largeImage').src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkwuzhHSDoz2wN-WclpAlPE2yvNHoEuMN_UWiM5nJ9_ZCNZQnh5bH61AMwlZ6PPa5YzvU&usqp=CAU';
+                                            // Afficher le modal Bootstrap
+                                            $('#facebookModal').modal('show');
+                                        }
+                                    </script>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="facebookModal" tabindex="-1" aria-labelledby="facebookModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="facebookModalLabel">Facebook Image</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Image agrandie pour afficher dans le modal -->
+                                                    <img id="largeImage" src="" class="img-fluid" alt="Large Facebook Image">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3>What</h3>
+                                    <h4 class="expandable">The Fishbone diagram, also known as the Ishikawa diagram, visually organizes potential causes into categories like People, Process, Environment, and more.
+                                        The 5 Whys technique involves asking "why" repeatedly to delve deeper into the chain of causation until the fundamental issue is uncovered.
+                                        Pareto Analysis helps prioritize efforts by identifying the vital few causes that contribute to the majority of problems..</h4>
+                                    <span class="show-more">Show more</span>
+                                </div>
+                                <div class="svg-container">
+                                    
+                                    <!-- Image de taille moyenne pour afficher dans la page -->
+                                    <img src="data:image/png;base64,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" class="img-fluid"  style="cursor: pointer;" onclick="showLargeImage()">
+                                    <!-- Script pour afficher l'image en grand -->
+                                    <script>
+                                        function showLargeImage() {
+                                            // Charger l'image en grand
+                                            document.getElementById('largeImage').src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPgAAADLCAMAAAB04a46AAAAilBMVEX///8AAAD39/cxMTHv7+/k5OT8/Pz5+fm3t7fy8vLY2Nji4uK+vr6QkJCTk5Pf39/r6+twcHClpaWEhITR0dFdXV3IyMiurq5UVFTT09MeHh52dnabm5t+fn4+Pj6KiopmZmZISEg4ODgNDQ0pKSkVFRVGRkZfX1+pqakiIiISEhIrKys0NDQ8PDz4YCKaAAAPbElEQVR4nOVd2ULqMBAVpGyWHVsERCoXFZf//70rNMuZNElT6CacJy3pctrJbJkkd3f1QXPsPTz50+HgZbZ9XHwv97vdrvGL3ed+f7943M5ehuvQH3ler+onzQnjIPyYRZufZcMR++/NYhB2R1U/+LloPQWD1fvOla4O76vpk1c1jwxo9j+Gm8MljBHLaO232lVzSsMoGG7v86IMOGynT1VzM2HsDxcFUAZE64eqSaqYh++vxZJm+BnURuf1+oPHUjhzHKbjqjnf3T2to4vU9pl4DKokPQq3FXBmWE6blZDuzF+c/ZGiMGuVzbrpV/ipEbMyndvxR8E2KxNmnXJYN8M6sT7howTW3XLNliO+Czbs80nVDI2YFcfaW+cWchSB14I82aB2HTuBMH/WzfW/qlm54CVn2qP69mwFmzwj9nn9ZVziOzeT7pcTaOaGQz7Mu0XkUYrFfQ5xS/gnNJqK+4u/dq2ttgWLi2gHf0/IBYbn036qo0r79/jSDZ68sdcPuqsfW8tzUzPee1lc3HE/9ai+7tvSAWeZ886sNDbOeJtrHjQwt1+dwTssj44zpvpHtTDvZ6Xdr6NOM7L4MJ7ylo12Z1UiHSt2iw/eh5eWdGJkvEAm/datIjuuwddg/kuWR0a23MrceI1Hd9q9WgQjryuf+ZwsxdW1PrTZqjnnouqg1LYfnjREb6dDihvWCiihofFajrF5r/IU4mKtjADHgQIqNm/2+XtkiYd84/V2TrzN55eC70GQjCZPv8AHbwmPBeKvB/NFdaZfxXPh1CxYdfV1HqcfZRoNKEK375mvmy7rXpW2e2J8rNPPwpR14BzIJFuIR2m8qxXzrZ24+A+12LNs1LdcOiUXU4mYvwtdaiR++sTSGn/B2eDBdi038W20m6Ub7937dNSUYvZuerLx8Vch1ESkQW0NLHdaW3h7nwXR0+Pfqsts0YgfMnpYpxZCQREXDWR4Y7mbxV+3hDe54/u5C063+IJG4qdnE8RRpLeykcWa2ZJvtg6SM3ylVKfJwwI98WAQnX4Vagz9Sog/bJLeaJjKIaeFUNQjUaIUsR+SxL2p9CKFSYJnRQm239QQztrfVr7YJUJL7oapKdEBdSr4YfCoQVmv7XfVDyIWHXrfT8BQfieSYPxHlXhEr8LEeiyPbGTbccOOgY53oeOAP4NjwS2ozqQXFdJfOsFYS3zpqV8J5DctsNI5rYUlFP9Npn0WRIBLmMzx87fyS9wLZlGjwWKzN/WCx28OKSb4iqmBtMZHeLmUnxHgXADxpEfOfc2vGSuVi79kO2mYv2eQbdgnr2DGJnFXc5LuYuiJJ8c2muqJjPi3/fJSs3XSawv36k1ztt9ve/gHsglAnAeSU2m91Ksw4l/qcYIfeXUH5azmIswZuuw4vPz6YzjeBLoHiPMPNZHupjoSG5/YsY9Uyki85fJ0lLclhM2GxUsQV1Oi6dUT585W1BD1l6pZYcT3DRukVXTyvgjvtF7kirkMFZA45AKhR3Hn8Ud2UtV/YsStGW4YGXKJKqmo52XA4ZJIHIrNuonGrZ2MpdVPFhNP6DwCqdp6LmXTRLnllkUGXwyJQ2CQJO5BaKVGhi7EpcfvuTziF/B2OsECOTZrIA7RiCT+yY70IVZUn8SFuLy2U74MAyBb4J6C6Pk3thTu8c5AHKIRSZw7biE0UB1tB+Jbee2U8CTGc8b2GmyG8x4V0H8G4lA1L4lzpXTMGHK131TsmQNxyCU5hZbSvT1X0KVSESrpFcQIiUNaSBLnqbNjSCZMcUTvMUonDmGmU2wp20dpTQ2QHVe8aYy3kDgIgiTOPdZjRxP5QyW2ciAOqZdELKNDP/kk2fBP3lAoN4y3kDgclrfjr/74twiZlADxIZ04mEqnSUDCwrg01mGgueE2C3EeuZAWimH10omDxXB5bGFAztVsGHGJYxhophInOWWu/hSLlD9xLpR2E2mD1NTSz89EnPmxsUngmlKJp2NW1tgjI3E+Q8f1g28GPo0UwA+QgR0WVKUR56nG04EdVzltetu4jTWNlpF4P0NbpofoO4KhKulngnOQSpwrx2PeB/QFvXEsVlaDm5E4a+qYdfGSAgcBl4wscNKPgbjQXlzLbBvRg+E0Ttw6NCJPdum2K+1tjGizR9RzkX4DZjDh0hgJCuJ8COCNJrppnBhnKEcNC6Qdd8kpsNZq2mW/+NB2+rj1ExxBoZZFrjgUCcQxEhQyxhRhWymhJ4Z8F7t81gyi6HNtl0G/tub1Ruv+UbJ0wTy7NDgIWG8lHSassgTiSx1xQxk1efEs6ME3nkD8spv+xGUCAfte2CmExGgEhnuioBFApcAJKLX3yfOPEArBMPOTfDYWuVrzgYu7dn/o5Kw2hE5Hb0FKaTIrwTWCpIjJaVB6WG7AiL8O/R4OFQniholwpD/vNS9DxefKfbo61ytE0uU3TAi70FlCjaGcgiBirejhtxuvnxKTYKa6tgBiulyIZwHvoOSg9LoSjpKQBvE58KlBQrCKrKtfp0IQN41TYyqZKYfcKpHYLZSuI7P+qnWXmuyNXuEEUEcO5XOitan8CPPxjHheYx1crSgpTei3irDLV8IeYYtPCh3mHOK9fhCuB1I74AyQfIkvua5R+7L8sIpzLL00VlFHJgdASt5h6SFO/NAmB6SXj7Vrh/iQQxL4azCdpiVg+Advq4ZvL7UvFXbojjPlTfwCsv0Ocx84L5GziNM3MuZBll+OxCfxjT3rwIPInCRdf9DVEb4QyBWeTkKHhKhCh3JwTlzo0rgKQpp61GT3TsT3oodZPZ3A0koyxLdCKqSO/QP9VXIZhwXWeH5OyHasImTxDnYzlry0h1Kv8F0sU8S2opFmhA0SCfArGUo/fhAyPwCNrMO6M5y4iETj0OdLKHkszN04EF92NFfXoGdtBJ1UjjLQkg1yDeX9aefsBkNMzPCyC+G4xR9JVkDh0GjkQJxYErN++7A3go8rhZ1I9q8WpkU7eBm1jGkcDF7pVQVx0eNYQln2EjA27JXbRn/Jw5gzFvjxtGOqIMXC4tKZbWOlYAqidDIC2/NnXGjw4XjYKT5UpBIHv+AxnTjW8rTMlRPYCbVlBkv4aPy5lXBiQYSrDVHYJxzHrAW+bk6cG4A2K+KRnQxqkLbpxD+lZ2zxc0hgoK9RBpPGBUcp8Q5IF8fsIBJHecIBSk6cX6R5UG8Cz8+UgzUjujx5Tc2H0DL0STuroREIBbuh1R9DM472PYLjWzjOixf5/zzUlcoHQoiVA/FG42e7tcfjSkGdoRWq4PjprSuEoTXDMXd8FA1xIRz8xUlJg9QiS16a55G5QSFg8u/A/YqF3cabeFU4WIrE8V0yIyBKtDhxbYaZJQIurCxW/UkTcdTBJyGzTjgfGs7EHofjDCvlXbSSbWRGJX4brctKixOzUIwZG2y50dVAItBJNFVZoG5ZIaU76aEudJdc37W6swvqNeJrqIhMTdEce0rwnQBOYEWRxnwCjjNMlMfhqWNQjFKI3i5fg0RTrGwu8cKXtLavMECKDuHLonknN2d3FUpc6HDZJM+ZvLoF3SzFyujn3FsXgyNOIhDsYLCPrh4jLjwKEYUarnkZtrpntlhHlNmRbaYWHeSAlk3UIJiTZR6d8FDF52UBTmfs5zfbT8vbmrTFVIrVjJMEKBBv4aCyhriQKcy6jv31o71QOQ/eVolyXkaCmFggTrJ2NuJC7iZRfoxjmJRTz1YTbJ2CCSBiCWGckXhsq2TeobjpXmbdZDOQB8dlciI8CYJ9Ik6oJWLi3NVpPxW2npB2tlEM6xwUvUrz1BwLOQfiVyPxOO9wdHU6D0Wu3GtYHucEe55em0YKVfkhp0AWI4X4qtd1GtY9G/bZ0tZTtarhWfH46ZA9hPukeiNJvGik5LntUazu5EiJbelwHqRmDMRb/oWetxNe07K99nBPs5zCMd1CcsvUuwTrT4a5T/3Nmw9LWoJ8m0I7dXZasp8cT9hj56dOlme49PTpY5unY2KH1dNksNcSHBLtTx8Y9RtVyyBhec7myganhaxScjqJdxdHGND5aY8F4mUuO4D4cdtEIC0OUt30OMiWnV+pnYCbVrScyvOdI1I8CMWkcT80VA8waGdglAlXRzv9+QxWm+s3pSdL4s0qlnjcZNkrI+Va1GqLSIpLlBJhsMpT/7mSxXpdtLmGiwFEeGSyillsqhyXv52+u6poheKs+yWkVfyS4gd5mMXr1CNZrqpbGCvb5z4iLVkPUQ4We8YRaOVb4DAsztjrrp12UamxiG3uUBGoFPYVHE1IS4FIk0b0wWQ8rcnuP2fvkZAmr0JrVL6Cow7v5+/omOZkiQlLNVxRPnJZg9GItC/J3H6nBRhKxb8LN3VLWyToVOfWDuq2PcjyPJ2GSPNi1t40KoNKFixz2fGmjkvlW/EZ5rPpS/26rxX3+e1vVIc1ll3x6h58OqAmzkg6ct+es46L5iexyn/PuhxH4wvDupBdOatKD7ri7XKzbcDZaweUgVXmHS8yoLgV/C7E20fBm6tXuqK6EZMStlWvn1HbTMvZa7dezJcv5W2lXqMQbFLuTuI12expkVMUkgFlrr5swP1UPxO5YFS8S8hmfX4W7UKMqkuXfw0rY31EuxoVt5gWtINyBpQ/yrvolmOw09Ar9aM/+/VgfUK/pD1DonWR8cdZmBfux+1mdfrUgFZY3J6dy0m3el1mQbNbwJDZYRWOS/fMsqPn56npFrOgUludEcHs8mzk/u05LC/cyg+jtetSUhpMBr5XTz3mhHbwssi0m+f34nHWDWqtxJzRHAfrQWSh73fDMOz684dxq/cHNFhWNPuGrOxlO5z/BRiG1QtLf9cH+hmvhYx21Avaou/rl3TDoJNhKcarQkdH/C95ZWdD58VX/UylQFMU6TxF4E9DM4sp1zKN+iJJ/Dq801Qk1in5Sj/nKpAolroFK35Ewmu1TV6+KvwoxG/AUY+h1lDcgKMeQx1gvML42wDK27zV89WBDrdsq36c8kDTMMktWK8WdEML63pYVwYyQyf7fL+/C2LQbiELwUHSMPnNHPgDuFniq1sljrJ+S32cyPotaXVSBHpLdpxk3m7IczsiEsQf0xtfE2QCSt3G/tohZV27+t31QoZo5dbWVw65psrNJBsZRHH/raSXOcSaKvsb6+RSsV+0WMVfBF9zwLo09zVCpKCqfpDS8XKrss43uttW/Rylg8+8v5lRJAH/FmPyE9Y3qt54+u1GymAITjMZNGs2Xz9O85YqmRFbNSY3GKLFeL65zBtHSJc0rR/+A38+52zkkYlDAAAAAElFTkSuQmCC';
+                                            // Afficher le modal Bootstrap
+                                            $('#facebookModal').modal('show');
+                                        }
+                                    </script>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="facebookModal" tabindex="-1" aria-labelledby="facebookModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="facebookModalLabel">Facebook Image</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Image agrandie pour afficher dans le modal -->
+                                                    <img id="largeImage" src="" class="img-fluid" alt="Large Facebook Image">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        
+
+
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3>How</h3>
+                                    <h4 class="expandable">Conducting RCA sessions involves engaging cross-functional teams to gain diverse perspectives and insights into the issue at hand.
+                                        Analyzing data from various sources such as customer feedback, production records, and quality reports validates identified causes and supports data-driven decision-making.
+                                        Implementing corrective actions requires clear action plans, accountability, and follow-up to ensure effective resolution of root causes.</h4>
+                                    <span class="show-more">Show more</span>
+                                </div>
+                                <div class="svg-container">
+                                    
+                                    <!-- Image de taille moyenne pour afficher dans la page -->
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8v-eZrCRSDAEp8_xh7zHkq561SBSm6hqDAKSAGNgLAdVNnJNBcSTPijnRJQ4C6wEHds&usqp=CAU" class="img-fluid"  style="cursor: pointer;" onclick="showLargeImage()">
+                                    <!-- Script pour afficher l'image en grand -->
+                                    <script>
+                                        function showLargeImage() {
+                                            // Charger l'image en grand
+                                            document.getElementById('largeImage').src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8v-eZrCRSDAEp8_xh7zHkq561SBSm6hqDAKSAGNgLAdVNnJNBcSTPijnRJQ4C6wEHds&usqp=CAU';
+                                            // Afficher le modal Bootstrap
+                                            $('#facebookModal').modal('show');
+                                        }
+                                    </script>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="facebookModal" tabindex="-1" aria-labelledby="facebookModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="facebookModalLabel">Facebook Image</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Image agrandie pour afficher dans le modal -->
+                                                    <img id="largeImage" src="" class="img-fluid" alt="Large Facebook Image">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+
+
+
+
+
+                            <div class="container mt-5">
+                                <!-- Section What If -->
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h3>What If</h3>
+                                        <h4 class="expandable">Applying RCA in complex systems or service industries requires considering interdependencies and potential ripple effects of corrective actions.
+                                            Strategies may include simulation modeling, stakeholder engagement, and pilot testing to manage complexities and mitigate risks effectively.</h4>
+                                        <span class="show-more">Show more</span>
+                                    </div>
+                                    <div class="svg-container">
+                                        <!-- Image de taille moyenne pour afficher dans la page -->
+                                        <img src="https://www.rosemansolutions.com/wordpress/wp-content/uploads/2013/09/what-if.jpg" class="img-fluid" style="cursor: pointer;" onclick="showLargeImage('https://www.rosemansolutions.com/wordpress/wp-content/uploads/2013/09/what-if.jpg')">
+                                    </div>
+                                </div>
+                        
+                                <!-- Modal -->
+                                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="imageModalLabel">RCA-Tutorial</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Image agrandie pour afficher dans le modal -->
+                                                <img id="largeImage" src="https://www.rosemansolutions.com/wordpress/wp-content/uploads/2013/09/what-if.jpg" class="img-fluid" alt="Large Image">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+          
+        </section>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+        
+      
+    </div>
+
+    <!-- Chargement des scripts JavaScript Bootstrap et jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script personnalisé pour gérer l'affichage des sections -->
+    <script>
+        $(document).ready(function() {
+        // Initialisation de la pagination avec ngx-pagination
+        $('.container').each(function() {
+            $(this).find('section').slice(0, 3).show(); // Affiche les trois premières sections
+        });
+
+        // Fonction pour changer de page
+        function showPage(page) {
+            var startIndex = (page - 1) * 3;
+            var endIndex = startIndex + 3;
+            $('.container').each(function() {
+                $(this).find('section').hide().slice(startIndex, endIndex).fadeIn();
+            });
+        }
+
+        // Gestion des changements de page
+        $('.my-pagination').on('pageChange', function(event, page) {
+            showPage(page);
+        });
+    });
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
