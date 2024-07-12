@@ -13,11 +13,16 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: 'lean/root-cause-analysis',
+        loadChildren: () => import('./demo/demo.module')
+          .then(m => m.DemoModule),
+      },
+      {
         path: "dashboard",
         component: ECommerceComponent,
       },
       {
-        path: "lean/root-cause-analysis",
+        path: "lean/jidoka",
         component: RootCauseAnalysisComponent,
       },
       {

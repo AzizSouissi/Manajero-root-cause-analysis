@@ -1,13 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import * as bootstrap from "bootstrap";
+import { DemoService } from "../../../@core/services/demo.service";
+import { Router } from "@angular/router";
+import { Demo } from "../../../@core/models/demo";
 
 @Component({
-  selector: "ngx-root-cause-analysis",
-  templateUrl: "./root-cause-analysis.component.html",
-  styleUrls: ["./root-cause-analysis.component.scss"],
+  selector: "ngx-rca-demo",
+  templateUrl: "./rca-demo.component.html",
+  styleUrls: ["./rca-demo.component.scss"],
 })
-export class RootCauseAnalysisComponent implements OnInit {
+export class RcaDemoComponent implements OnInit {
   sections = [
     {
       id: "root-cause-analysis",
@@ -30,6 +33,7 @@ export class RootCauseAnalysisComponent implements OnInit {
       content: "Content of Limitations and Acceptations section",
     },
   ];
+  demo!: Demo;
 
   // Pagination settings
   p: number = 1;
@@ -40,30 +44,38 @@ export class RootCauseAnalysisComponent implements OnInit {
   currentPage = 1; // Current page number
   items = Array.from({ length: 50 }).map((_, i) => `Item ${i + 1}`);
   imgUrlWhat = "";
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private demoService: DemoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.setupShowMoreFunctionality();
     this.setupCameraIconClickHandler();
     this.setPage(1);
+    this.demoService.getDemo().subscribe(
+      (data: Demo) => {
+        this.demo = data;
+        console.log(this.demo);
+      },
+      (error) => {
+        console.error("Error fetching demo", error);
+      }
+    );
   }
   setPage(page: number) {
-    // Calculate starting and ending index for the current page
     const startIndex = (page - 1) * this.itemsPerPage;
     const endIndex = Math.min(
       startIndex + this.itemsPerPage - 1,
       this.items.length - 1
     );
 
-    // Extract the current page items
     this.pagedItems = this.items.slice(startIndex, endIndex + 1);
   }
 
   pageChanged(event: any) {
     console.log("Page changed to: " + event.page);
-    // Example: Fetch data from an API based on the page number
-    // Replace with your actual data fetching logic
-    // For demonstration purposes, just logging the items for the new page
     const startIndex = (event.page - 1) * 3;
     const endIndex = startIndex + 3;
     console.log(
