@@ -22,7 +22,7 @@ const routes: Routes = [
         component: ECommerceComponent,
       },
       {
-        path: "lean/jidoka",
+        path: "lean/rca",
         component: RootCauseAnalysisComponent,
       },
       {

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable, Subject, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { Demo } from "../models/demo";
-
 @Injectable({
   providedIn: "root",
 })
@@ -26,7 +26,8 @@ export class DemoService {
     return this.http.get<Demo>(this.URL);
   }
 
-  updateDemo(demo: Demo): Observable<Demo> {
-    return this.http.put<Demo>(this.URL, demo);
+  updateDemo(id: string, demo: Demo): Observable<Demo> {
+    const updateUrl = `${this.URL}/${id}`;
+    return this.http.put<Demo>(updateUrl, demo);
   }
 }

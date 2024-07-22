@@ -11,6 +11,9 @@ import { Demo } from "../../../@core/models/demo";
   styleUrls: ["./rca-demo.component.scss"],
 })
 export class RcaDemoComponent implements OnInit {
+  editContent() {
+    throw new Error("Method not implemented.");
+  }
   sections = [
     {
       id: "root-cause-analysis",
@@ -34,6 +37,15 @@ export class RcaDemoComponent implements OnInit {
     },
   ];
   demo!: Demo;
+  isEditing: boolean = false;
+  isEditingStep1: boolean = false;
+  isEditingStep2: boolean = false;
+  isEditingStep3: boolean = false;
+  isEditingStep4: boolean = false;
+  isEditingWhy = false;
+  isEditingWhat = false;
+  isEditingHow = false;
+  isEditingWhatIf = false;
 
   // Pagination settings
   p: number = 1;
@@ -51,9 +63,6 @@ export class RcaDemoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setupShowMoreFunctionality();
-    this.setupCameraIconClickHandler();
-    this.setPage(1);
     this.demoService.getDemo().subscribe(
       (data: Demo) => {
         this.demo = data;
@@ -64,66 +73,111 @@ export class RcaDemoComponent implements OnInit {
       }
     );
   }
-  setPage(page: number) {
-    const startIndex = (page - 1) * this.itemsPerPage;
-    const endIndex = Math.min(
-      startIndex + this.itemsPerPage - 1,
-      this.items.length - 1
-    );
 
-    this.pagedItems = this.items.slice(startIndex, endIndex + 1);
+  // Toggle edit mode
+  toggleEdit() {
+    if (this.isEditing) {
+      this.saveEdit("introduction");
+    }
+    this.isEditing = !this.isEditing;
   }
 
-  pageChanged(event: any) {
-    console.log("Page changed to: " + event.page);
-    const startIndex = (event.page - 1) * 3;
-    const endIndex = startIndex + 3;
-    console.log(
-      "Displaying items from index " + startIndex + " to " + endIndex
-    );
-    console.log(this.items.slice(startIndex, endIndex));
-  }
-
-  private setupShowMoreFunctionality(): void {
-    const showMoreButtons = document.querySelectorAll(".show-more");
-
-    showMoreButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const expandable = this.parentElement.querySelector(".expandable");
-        expandable.classList.toggle("open");
-
-        if (expandable.classList.contains("open")) {
-          this.textContent = "Show less";
-        } else {
-          this.textContent = "Show more";
-        }
+  // Save edited data
+  saveEdit(field: string) {
+    if (this.isEditing) {
+      // Optionally, add validation or transformation logic here
+      this.demoService.updateDemo(this.demo.id, this.demo).subscribe({
+        next: (response) => {
+          console.log("Update successful", response);
+        },
+        error: (error) => {
+          console.error("Update failed", error);
+        },
       });
+    }
+    this.isEditing = false;
+  }
+
+  toggleEditStep(step: string) {
+    switch (step) {
+      case "step1":
+        if (this.isEditingStep1) {
+          this.saveEdit("step1title");
+          this.saveEdit("step1content");
+        }
+        this.isEditingStep1 = !this.isEditingStep1;
+        break;
+      case "step2":
+        if (this.isEditingStep2) {
+          this.saveEdit("step2title");
+          this.saveEdit("step2content");
+        }
+        this.isEditingStep2 = !this.isEditingStep2;
+        break;
+      case "step3":
+        if (this.isEditingStep3) {
+          this.saveEdit("step3title");
+          this.saveEdit("step3content");
+        }
+        this.isEditingStep3 = !this.isEditingStep3;
+        break;
+      case "step4":
+        if (this.isEditingStep4) {
+          this.saveEdit("step4title");
+          this.saveEdit("step4content");
+        }
+        this.isEditingStep4 = !this.isEditingStep4;
+        break;
+    }
+  }
+
+  // Save edited data
+  saveEditStep(field: string) {
+    alert("are you sure ?");
+    this.demoService.updateDemo(this.demo.id, this.demo).subscribe({
+      next: (response) => {
+        console.log("Update successful", response);
+      },
+      error: (error) => {
+        console.error("Update failed", error);
+      },
     });
   }
 
-  private setupCameraIconClickHandler(): void {
-    const cameraIcons = document.querySelectorAll(".bi-camera");
+  // Toggle edit mode for a specific section
+  toggleEditTutorial(section: string) {
+    switch (section) {
+      case "why":
+        this.isEditingWhy = !this.isEditingWhy;
+        if (this.isEditingWhy) this.isEditingWhat = false;
+        break;
+      case "what":
+        this.isEditingWhat = !this.isEditingWhat;
+        if (this.isEditingWhat) this.isEditingWhy = false;
+        break;
+      case "how":
+        this.isEditingHow = !this.isEditingHow;
+        if (this.isEditingHow) this.isEditingWhat = false;
+        break;
+      case "whatIf":
+        this.isEditingWhatIf = !this.isEditingWhatIf;
+        if (this.isEditingWhatIf) this.isEditingHow = false;
+        break;
+    }
+  }
 
-    const imageUrls = ["assets/images/fishbone.png", "assets/images/rcaex.png"];
-
-    cameraIcons.forEach((icon, index) => {
-      icon.addEventListener("click", function () {
-        const imageUrl = imageUrls[index];
-        const modalId = this.getAttribute("data-target");
-        const modalElement = document.querySelector(modalId);
-
-        if (imageUrl && modalElement) {
-          const modalImage = modalElement.querySelector(
-            ".modal-body img"
-          ) as HTMLImageElement;
-
-          if (modalImage) {
-            modalImage.src = imageUrl;
-            const modal = new bootstrap.Modal(modalElement as HTMLElement);
-            modal.show();
-          }
-        }
-      });
+  // Save edited data
+  saveContentTutorial(section: string) {
+    this.demoService.updateDemo(this.demo.id, this.demo).subscribe({
+      next: (response) => {
+        console.log("Update successful", response);
+      },
+      error: (error) => {
+        console.error("Update failed", error);
+      },
     });
   }
+
+  // Cancel editing and revert changes
+  cancelEditTutorial(section: string) {}
 }
