@@ -4,6 +4,7 @@ import * as bootstrap from "bootstrap";
 import { DemoService } from "../../../@core/services/demo.service";
 import { Router } from "@angular/router";
 import { Demo } from "../../../@core/models/demo";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "ngx-rca-demo",
@@ -46,16 +47,47 @@ export class RcaDemoComponent implements OnInit {
   isEditingWhat = false;
   isEditingHow = false;
   isEditingWhatIf = false;
+  newContent: string = '';
 
   // Pagination settings
   p: number = 1;
   itemsPerPage: number = 3;
 
   pagedItems: any[] = []; // Initialize pagedItems array
-
+  isAdding: boolean = false;
   currentPage = 1; // Current page number
   items = Array.from({ length: 50 }).map((_, i) => `Item ${i + 1}`);
   imgUrlWhat = "";
+
+  editorModules = {
+    toolbar: [
+      [{ 'font': [] }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
+      [{ 'header': 1 }, { 'header': 2 }, 'blockquote', 'code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }],
+      [{ 'align': [] }],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+    imageUploader: {
+      upload: file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            resolve(e.target.result);
+          };
+          reader.onerror = error => {
+            reject('Image upload failed');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+  };
   constructor(
     private http: HttpClient,
     private demoService: DemoService,
@@ -72,6 +104,35 @@ export class RcaDemoComponent implements OnInit {
         console.error("Error fetching demo", error);
       }
     );
+  }
+  navigateToQuiz() {
+    this.router.navigate(['/quiz']);
+  }
+  toggleAdd(): void {
+    this.isAdding = !this.isAdding;
+  }
+
+  saveNewContent(): void {
+    const newDemo = { content: this.newContent };
+    this.createDemo(newDemo).subscribe(
+      response => {
+        console.log('New demo saved successfully', response);
+        this.isAdding = false;
+        this.newContent = '';
+      },
+      error => {
+        console.error('Error saving new demo', error);
+      }
+    );
+  }
+
+  createDemo(demo: { content: string }): Observable<{ content: string }> {
+    const URL = 'YOUR_API_URL'; // Replace with your actual API URL
+    return this.http.post<{ content: string }>(URL, demo);
+  }
+
+  tryItOut(): void {
+    // Your implementation for the "Try it out" button
   }
 
   // Toggle edit mode

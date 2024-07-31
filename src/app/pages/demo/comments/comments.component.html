@@ -1,0 +1,72 @@
+<div class="container mt-4">
+    <!-- Comment Section -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Comments</h5>
+  
+        <!-- Add Comment -->
+        <div class="mb-3">
+          <textarea class="form-control" rows="4" #commentAddInput placeholder="Write a comment..." style="font-size: 16px;"></textarea>
+          <button class="btn btn-primary mt-2" (click)="submitComment(commentAddInput)">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i> Post
+          </button>
+        </div>
+  
+        <!-- Display Comments -->
+        <div *ngIf="comments.length > 0">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let comment of comments">
+              <div class="d-flex justify-content-between">
+                <strong>{{ comment.author }}</strong>
+                <div>
+                  <!-- Edit Button -->
+                  <button class="btn btn-link btn-sm" (click)="editComment(comment)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                  </button>
+                  <!-- Delete Button -->
+                  <button class="btn btn-link btn-sm" (click)="deleteComment(comment.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                  </button>
+                </div>
+              </div>
+              <p *ngIf="!comment.isEditing">{{ comment.text }}</p>
+              <textarea *ngIf="comment.isEditing" class="form-control mb-2" rows="2" [(ngModel)]="comment.editText" placeholder="Edit your comment..."></textarea>
+              <button *ngIf="comment.isEditing" class="btn btn-primary" (click)="updateComment(comment)">Save</button>
+  
+              <!-- Replies Section -->
+              <div *ngIf="comment.replies?.length > 0" class="mt-2">
+                <div *ngFor="let reply of comment.replies" class="card mb-2">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <strong>{{ reply.author }}</strong>
+                      <div>
+                        <!-- Edit Reply Button -->
+                        <button class="btn btn-link btn-sm" (click)="editReply(reply, comment)">
+                          <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                        </button>
+                        <!-- Delete Reply Button -->
+                        <button class="btn btn-link btn-sm" (click)="deleteReply(reply.id, comment.id)">
+                          <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                        </button>
+                      </div>
+                    </div>
+                    <p *ngIf="!reply.isEditing">{{ reply.text }}</p>
+                    <textarea *ngIf="reply.isEditing" class="form-control mb-2" rows="2" [(ngModel)]="reply.editText" placeholder="Edit your reply..."></textarea>
+                    <button *ngIf="reply.isEditing" class="btn btn-primary" (click)="updateReply(reply, comment)">Save</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Reply -->
+              <div class="mt-2">
+                <textarea class="form-control" rows="2" #replyInput placeholder="Write a reply..." style="font-size: 14px;"></textarea>
+                <button class="btn btn-secondary mt-2" (click)="addReply(comment.id, replyInput)">
+                  <i class="fa fa-reply" aria-hidden="true"></i> Reply
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  

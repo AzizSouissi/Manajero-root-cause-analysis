@@ -6,12 +6,18 @@ import { RcaDemoComponent } from './rca-demo/rca-demo.component';
 import { UpdateDemoComponent } from './update-demo/update-demo.component';
 import { NbCardComponent, NbCardModule, NbIconModule, NbStepperModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuizComponent } from './quiz/quiz.component';
+import { ResultsChartComponent } from './results-chart/results-chart.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 @NgModule({
   declarations: [
     RcaDemoComponent,
-    UpdateDemoComponent
+    UpdateDemoComponent,
+    QuizComponent,
+    ResultsChartComponent,
+    CommentsComponent,
   ],
   imports: [
     CommonModule,

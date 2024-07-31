@@ -1,0 +1,38 @@
+/* Ensure text color is white */
+.container {
+    color: white;
+  }
+  
+  /* Style for the cards */
+  .card {
+    background-color: gray;
+    border: 1px solid gray;
+    color: white;
+  }
+  
+  .card-title {
+    color: white;
+  }
+  
+  /* Style for the single image */
+  .single-image {
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+  }
+  
+  /* Additional styling for questions and answers */
+  .question-container {
+    margin: 20px 0;
+  }
+  
+  .responses {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .response {
+    margin: 10px 0;
+  }
+  
