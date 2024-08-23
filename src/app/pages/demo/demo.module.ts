@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizComponent } from './quiz/quiz.component';
 import { ResultsChartComponent } from './results-chart/results-chart.component';
 import { CommentsComponent } from './comments/comments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CommentsComponent } from './comments/comments.component';
     QuizComponent,
     ResultsChartComponent,
     CommentsComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
