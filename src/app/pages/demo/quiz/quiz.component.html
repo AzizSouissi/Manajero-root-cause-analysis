@@ -19,5 +19,5 @@
   
   <div class="container" *ngIf="quizCompleted">
     <app-results-chart [correctAnswers]="correctAnswers" [falseAnswers]="falseAnswers"></app-results-chart>
-    <button class="btn btn-secondary mt-3" (click)="router.navigate(['/'])">Back to Quiz</button>
+    <a routerLink="/pages/lean/root-cause-analysis" class="btn btn-primary me-2">Back to demo</a>
   </div>

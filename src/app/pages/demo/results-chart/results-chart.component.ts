@@ -71,8 +71,5 @@ export class ResultsChartComponent implements OnChanges, OnDestroy {
       this.chart.destroy();
     }
   }
-
-  navigateToComments() {
-    this.router.navigate(["/comments"]);
-  }
 }
+

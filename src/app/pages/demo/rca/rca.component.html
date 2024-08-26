@@ -1,0 +1,151 @@
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <!-- Navigation Buttons -->
+            <a routerLink="/pages/lean/root-cause-analysis/dash" class="btn btn-primary me-2">Dashboard</a>
+            <a routerLink="/pages/lean/root-cause-analysis" class="btn btn-secondary">Back to Demo</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center mb-4">{{ isEditMode ? 'Edit Project' : 'Create New Project' }}</h2>
+
+            <!-- Error Message Display -->
+            <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+            </div>
+
+            <!-- Project Form for Adding/Editing -->
+            <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <!-- Project Name -->
+                <div class="form-group mb-3">
+                    <label for="name">Project Name</label>
+                    <input type="text" id="name" class="form-control" formControlName="name"
+                        placeholder="Enter project name" />
+                </div>
+
+                <!-- Description -->
+                <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea id="description" class="form-control" rows="3" formControlName="description"
+                        placeholder="Enter project description"></textarea>
+                </div>
+
+                <!-- Dates -->
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" class="form-control" formControlName="startDate" />
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" class="form-control" formControlName="endDate" />
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="form-group mb-3">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control" formControlName="status">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <!-- Owner -->
+                <div class="form-group mb-3">
+                    <label for="owner">Owner</label>
+                    <input type="text" id="owner" class="form-control" formControlName="owner"
+                        placeholder="Enter project owner" />
+                </div>
+
+                <!-- Priority and Impact -->
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="priority">Priority</label>
+                        <select id="priority" class="form-control" formControlName="priority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="impact">Impact</label>
+                        <select id="impact" class="form-control" formControlName="impact">
+                            <option value="Critical">Critical</option>
+                            <option value="Major">Major</option>
+                            <option value="Minor">Minor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Root Cause -->
+                <div class="form-group mb-3">
+                    <label for="rootCause">Root Cause</label>
+                    <textarea id="rootCause" class="form-control" rows="2" formControlName="rootCause"
+                        placeholder="Enter root cause"></textarea>
+                </div>
+
+                <!-- Corrective Action -->
+                <div class="form-group mb-3">
+                    <label for="correctiveAction">Corrective Action</label>
+                    <textarea id="correctiveAction" class="form-control" rows="2" formControlName="correctiveAction"
+                        placeholder="Enter corrective action"></textarea>
+                </div>
+
+                <!-- Category -->
+                <div class="form-group mb-3">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" class="form-control" formControlName="category"
+                        placeholder="Enter project category" />
+                </div>
+
+                <!-- Team Members -->
+                <div class="form-group mb-3">
+                    <label for="teamMembers">Team Members</label>
+                    <input type="text" id="teamMembers" class="form-control" formControlName="teamMembers"
+                        placeholder="Enter team members" />
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">
+                        {{ isEditMode ? 'Update Project' : 'Create Project' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditMode">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- List of Projects -->
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <h3 class="text-center mb-4">Existing Projects</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    *ngFor="let project of rcaProjects">
+                    <div>
+                        <h5>{{ project.name }}</h5>
+                        <p class="mb-1">{{ project.description }}</p>
+                        <small>{{ project.status }} | Owner: {{ project.owner }}</small>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-info me-2" (click)="editProject(project)">
+                            Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteProject(project.id)">
+                            Delete
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

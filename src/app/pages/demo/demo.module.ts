@@ -10,6 +10,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { ResultsChartComponent } from './results-chart/results-chart.component';
 import { CommentsComponent } from './comments/comments.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RcaComponent } from './rca/rca.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ResultsChartComponent,
     CommentsComponent,
     DashboardComponent,
+    RcaComponent,
   ],
   imports: [
     CommonModule,

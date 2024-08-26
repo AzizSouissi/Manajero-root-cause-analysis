@@ -14,38 +14,40 @@
     <div class="container">
         <section id="root-cause-analysis">
             <div class="card mx-auto mb-4">
-              <div class="button-container">
-                <button nbButton status="primary" class="edit-button" (click)="tryItOut()">Try it out</button>
-              </div>
-              <router-outlet></router-outlet>
-              <div class="card-body">
-                <h1 class="card-title">Root Cause Analysis (Ishikawa)</h1>
-                <br><br>
-                <div class="content-container1">
-                  <h6 class="expandable">
-                    <!-- Display text or input based on edit mode -->
-                    <span *ngIf="!isEditing">{{demo.introduction}}</span>
-                    <input *ngIf="isEditing" [(ngModel)]="demo.introduction" (blur)="saveEdit('introduction')" />
-                  </h6>
-                  <span class="show-more" (click)="toggleEdit()">Show more</span>
-                  <div class="button-container">
-                    <!-- Toggle edit mode -->
-                    <button nbButton status="primary" (click)="toggleEdit()" class="edit-button">{{ isEditing ? 'Save' : 'Edit' }}</button>
-                  </div>
+                <div class="button-container">
+                    <a routerLink="/pages/lean/root-cause-analysis/method" class="btn btn-primary me-2">Try it out!</a>
                 </div>
-              </div>
-              <!-- Add button -->
-              <div class="button-container">
-                <button nbButton status="success" class="add-button" (click)="toggleAdd()">Add New Content</button>
-              </div>
-              <!-- Quill Editor -->
-              <div *ngIf="isAdding">
-                <quill-editor [(ngModel)]="newContent" [modules]="editorModules"></quill-editor>
-                <button nbButton status="primary" (click)="saveNewContent()" class="save-button">Save</button>
-              </div>
+                <router-outlet></router-outlet>
+                <div class="card-body">
+                    <h1 class="card-title">Root Cause Analysis (Ishikawa)</h1>
+                    <br><br>
+                    <div class="content-container1">
+                        <h6 class="expandable">
+                            <!-- Display text or input based on edit mode -->
+                            <span *ngIf="!isEditing">{{demo.introduction}}</span>
+                            <input *ngIf="isEditing" [(ngModel)]="demo.introduction"
+                                (blur)="saveEdit('introduction')" />
+                        </h6>
+                        <span class="show-more" (click)="toggleEdit()">Show more</span>
+                        <div class="button-container">
+                            <!-- Toggle edit mode -->
+                            <button nbButton status="primary" (click)="toggleEdit()" class="edit-button">{{ isEditing ?
+                                'Save' : 'Edit' }}</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add button -->
+                <div class="button-container">
+                    <button nbButton status="success" class="add-button" (click)="toggleAdd()">Add New Content</button>
+                </div>
+                <!-- Quill Editor -->
+                <div *ngIf="isAdding">
+                    <quill-editor [(ngModel)]="newContent" [modules]="editorModules"></quill-editor>
+                    <button nbButton status="primary" (click)="saveNewContent()" class="save-button">Save</button>
+                </div>
             </div>
-          </section>
-          
+        </section>
+
         <!-- Section Stepper -->
         <section id="stepper-section" class="my-5">
             <div class="card mx-auto mb-4">
@@ -324,7 +326,7 @@
             </div>
         </section>
         <!-- rca-demo.component.html -->
-<button (click)="navigateToQuiz()">Test de compréhension</button>
+        <a routerLink="/pages/lean/root-cause-analysis/quizz" class="btn btn-primary me-2">Quizz</a>
 
     </div>
 </body>
