@@ -12,200 +12,149 @@
 
 <body>
     <div class="container">
-        <section id="root-cause-analysis">
+
+        <!-- Root Cause Analysis Section -->
+        <section id="root-cause-analysis" class="my-4">
             <div class="card mx-auto mb-4">
-                <div class="button-container">
-                    <a routerLink="/pages/lean/root-cause-analysis/method" class="btn btn-primary me-2">Try it out!</a>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="card-title mb-0">Root Cause Analysis (Ishikawa)</h1>
+                    <a routerLink="/pages/lean/root-cause-analysis/method" class="btn btn-primary">Try it out!</a>
                 </div>
-                <router-outlet></router-outlet>
                 <div class="card-body">
-                    <h1 class="card-title">Root Cause Analysis (Ishikawa)</h1>
-                    <br><br>
                     <div class="content-container1">
                         <h6 class="expandable">
-                            <!-- Display text or input based on edit mode -->
-                            <span *ngIf="!isEditing">{{demo.introduction}}</span>
-                            <input *ngIf="isEditing" [(ngModel)]="demo.introduction"
-                                (blur)="saveEdit('introduction')" />
+                            <span *ngIf="!isEditing">{{ demo.introduction }}</span>
+                            <input *ngIf="isEditing" [(ngModel)]="demo.introduction" class="form-control" />
                         </h6>
-                        <span class="show-more" (click)="toggleEdit()">Show more</span>
-                        <div class="button-container">
-                            <!-- Toggle edit mode -->
-                            <button nbButton status="primary" (click)="toggleEdit()" class="edit-button">{{ isEditing ?
-                                'Save' : 'Edit' }}</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add button -->
-                <div class="button-container">
-                    <button nbButton status="success" class="add-button" (click)="toggleAdd()">Add New Content</button>
-                </div>
-                <!-- Quill Editor -->
-                <div *ngIf="isAdding">
-                    <quill-editor [(ngModel)]="newContent" [modules]="editorModules"></quill-editor>
-                    <button nbButton status="primary" (click)="saveNewContent()" class="save-button">Save</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Stepper -->
-        <section id="stepper-section" class="my-5">
-            <div class="card mx-auto mb-4">
-                <div class="card-body">
-                    <nb-stepper orientation="horizontal">
-                        <!-- First Step -->
-                        <nb-step [label]="'First step'">
-                            <ng-template #labelOne>First step</ng-template>
-
-                            <!-- Step 1 Title -->
-                            <h4 *ngIf="!isEditingStep1">{{demo.step1title}}</h4>
-                            <input *ngIf="isEditingStep1" [(ngModel)]="demo.step1title"
-                                (blur)="saveEditStep('step1title')" placeholder="Step 1 Title" />
-
-                            <br>
-
-                            <!-- Step 1 Content -->
-                            <h6 class="lorem" *ngIf="!isEditingStep1">{{demo.step1content}}</h6>
-                            <textarea *ngIf="isEditingStep1" [(ngModel)]="demo.step1content"
-                                (blur)="saveEditStep('step1content')" placeholder="Step 1 Content"></textarea>
-
-                            <br>
-
-                            <button nbButton disabled nbStepperPrevious>prev</button>
-                            <button nbButton nbStepperNext>next</button>
-                            <button nbButton status="primary" (click)="toggleEditStep('step1')" class="edit-button">
-                                {{ isEditingStep1 ? 'Save' : 'Edit' }}
-                            </button>
-                        </nb-step>
-
-                        <!-- Second Step -->
-                        <nb-step [label]="'Second step'">
-                            <ng-template #labelTwo>Second step</ng-template>
-
-                            <!-- Step 2 Title -->
-                            <h4 *ngIf="!isEditingStep2">{{demo.step2title}}</h4>
-                            <input *ngIf="isEditingStep2" [(ngModel)]="demo.step2title"
-                                (blur)="saveEditStep('step2title')" placeholder="Step 2 Title" />
-
-                            <br>
-
-                            <!-- Step 2 Content -->
-                            <h6 class="lorem" *ngIf="!isEditingStep2">{{demo.step2content}}</h6>
-                            <textarea *ngIf="isEditingStep2" [(ngModel)]="demo.step2content"
-                                (blur)="saveEditStep('step2content')" placeholder="Step 2 Content"></textarea>
-
-                            <br>
-
-                            <button nbButton nbStepperPrevious>prev</button>
-                            <button nbButton nbStepperNext>next</button>
-                            <button nbButton status="primary" (click)="toggleEditStep('step2')" class="edit-button">
-                                {{ isEditingStep2 ? 'Save' : 'Edit' }}
-                            </button>
-                        </nb-step>
-
-                        <!-- Third Step -->
-                        <nb-step [label]="'Third step'">
-
-                            <!-- Step 3 Title -->
-                            <h4 *ngIf="!isEditingStep3">{{demo.step3title}}</h4>
-                            <input *ngIf="isEditingStep3" [(ngModel)]="demo.step3title"
-                                (blur)="saveEditStep('step3title')" placeholder="Step 3 Title" />
-
-                            <br>
-
-                            <!-- Step 3 Content -->
-                            <h6 class="lorem" *ngIf="!isEditingStep3">{{demo.step3content}}</h6>
-                            <textarea *ngIf="isEditingStep3" [(ngModel)]="demo.step3content"
-                                (blur)="saveEditStep('step3content')" placeholder="Step 3 Content"></textarea>
-
-                            <br>
-
-                            <button nbButton nbStepperPrevious>prev</button>
-                            <button nbButton nbStepperNext>next</button>
-                            <button nbButton status="primary" (click)="toggleEditStep('step3')" class="edit-button">
-                                {{ isEditingStep3 ? 'Save' : 'Edit' }}
-                            </button>
-                        </nb-step>
-
-                        <!-- Fourth Step -->
-                        <nb-step [label]="'Fourth step'">
-
-                            <!-- Step 4 Title -->
-                            <h4 *ngIf="!isEditingStep4">{{demo.step4title}}</h4>
-                            <input *ngIf="isEditingStep4" [(ngModel)]="demo.step4title"
-                                (blur)="saveEditStep('step4title')" placeholder="Step 4 Title" />
-
-                            <br>
-
-                            <!-- Step 4 Content -->
-                            <h6 class="lorem" *ngIf="!isEditingStep4">{{demo.step4content}}</h6>
-                            <textarea *ngIf="isEditingStep4" [(ngModel)]="demo.step4content"
-                                (blur)="saveEditStep('step4content')" placeholder="Step 4 Content"></textarea>
-
-                            <br>
-
-                            <button nbButton nbStepperPrevious>prev</button>
-                            <button nbButton disabled nbStepperNext>next</button>
-                            <button nbButton status="primary" (click)="toggleEditStep('step4')" class="edit-button">
-                                {{ isEditingStep4 ? 'Save' : 'Edit' }}
-                            </button>
-                        </nb-step>
-                    </nb-stepper>
-
-                </div>
-            </div>
-        </section>
-        <!-- Section Ishikawa Diagram -->
-        <section id="ishikawa-diagram">
-            <div class="card mx-auto mb-4">
-                <div class="card-body">
-                    <h1 class="card-title">Ishikawa Diagram Example</h1>
-                    <br><br>
-                    <div class="content-container">
-                        <h6 class="expandable">
-                            {{demo.example}}
-                        </h6>
-                        <span class="show-more">Show more</span>
-                        <div class="button-container">
-                            <button nbButton status="primary" (click)="editContent()" class="edit-button">Edit</button>
-                        </div>
-                    </div>
-                    <div class="svg-container">
-                        <h5 class="card-title">View Diagram</h5>
-                        <!-- Icône de l'appareil photo Bootstrap -->
-                        <i class="bi bi-camera bi-3x" style="cursor: pointer;" data-toggle="modal"
-                            data-target="#fishboneModal"></i>
-                        <!-- Modal -->
-                        <div class="modal fade" id="fishboneModal" tabindex="-1" aria-labelledby="fishboneModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="fishboneModalLabel">View Diagram</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="assets/images/fishbone.png" class="img-fluid" alt="Ishikawa">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
+                        <div class="button-container d-flex justify-content-between mt-2">
+                            <span class="show-more" (click)="toggleEdit()">{{ isEditing ? 'Hide' : 'Show more' }}</span>
+                            <div>
+                                <button nbButton status="primary" *ngIf="isEditing" (click)="saveEdit('introduction')"
+                                    class="me-2">Save</button>
+                                <button nbButton status="warning" *ngIf="isEditing"
+                                    (click)="cancelEdit()">Cancel</button>
+                                <button nbButton status="primary" *ngIf="!isEditing" (click)="toggleEdit()"
+                                    class="edit-button">Edit</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="button-container text-center">
+                    <button nbButton status="success" class="add-button" (click)="toggleAdd()">Add New Content</button>
+                </div>
+                <div *ngIf="isAdding" class="mt-3">
+                    <quill-editor [(ngModel)]="newContent" [modules]="editorModules" class="editor"></quill-editor>
+                    <button nbButton status="primary" (click)="saveNewContent()" class="save-button mt-2">Save</button>
+                </div>
             </div>
         </section>
-        <!-- Section Limitations and Acceptations -->
-        <section id="limitations-acceptations">
+
+        <!-- Stepper Section -->
+        <section id="stepper-section" class="my-5">
+            <div class="card mx-auto mb-4">
+                <div class="card-body">
+                    <nb-stepper orientation="horizontal">
+                        <nb-step [label]="'First step'">
+                            <div class="step-content">
+                                <h4 *ngIf="!isEditingStep1">{{ demo.step1title }}</h4>
+                                <input *ngIf="isEditingStep1" [(ngModel)]="demo.step1title" class="form-control"
+                                    placeholder="Step 1 Title" />
+                                <h6 *ngIf="!isEditingStep1">{{ demo.step1content }}</h6>
+                                <textarea *ngIf="isEditingStep1" [(ngModel)]="demo.step1content" class="form-control"
+                                    placeholder="Step 1 Content"></textarea>
+                            </div>
+                            <div class="button-container d-flex justify-content-between mt-2">
+                                <button nbButton nbStepperPrevious>Prev</button>
+                                <button nbButton nbStepperNext>Next</button>
+                                <div>
+                                    <button nbButton status="primary" *ngIf="isEditingStep1"
+                                        (click)="saveEditStep('step1')">Save</button>
+                                    <button nbButton status="warning" *ngIf="isEditingStep1"
+                                        (click)="cancelEditStep('step1')">Cancel</button>
+                                    <button nbButton status="primary" *ngIf="!isEditingStep1"
+                                        (click)="toggleEditStep('step1')">Edit</button>
+                                </div>
+                            </div>
+                        </nb-step>
+
+                        <nb-step [label]="'Second step'">
+                            <div class="step-content">
+                                <h4 *ngIf="!isEditingStep2">{{ demo.step2title }}</h4>
+                                <input *ngIf="isEditingStep2" [(ngModel)]="demo.step2title" class="form-control"
+                                    placeholder="Step 2 Title" />
+                                <h6 *ngIf="!isEditingStep2">{{ demo.step2content }}</h6>
+                                <textarea *ngIf="isEditingStep2" [(ngModel)]="demo.step2content" class="form-control"
+                                    placeholder="Step 2 Content"></textarea>
+                            </div>
+                            <div class="button-container d-flex justify-content-between mt-2">
+                                <button nbButton nbStepperPrevious>Prev</button>
+                                <button nbButton nbStepperNext>Next</button>
+                                <div>
+                                    <button nbButton status="primary" *ngIf="isEditingStep2"
+                                        (click)="saveEditStep('step2')">Save</button>
+                                    <button nbButton status="warning" *ngIf="isEditingStep2"
+                                        (click)="cancelEditStep('step2')">Cancel</button>
+                                    <button nbButton status="primary" *ngIf="!isEditingStep2"
+                                        (click)="toggleEditStep('step2')">Edit</button>
+                                </div>
+                            </div>
+                        </nb-step>
+
+                        <nb-step [label]="'Third step'">
+                            <div class="step-content">
+                                <h4 *ngIf="!isEditingStep3">{{ demo.step3title }}</h4>
+                                <input *ngIf="isEditingStep3" [(ngModel)]="demo.step3title" class="form-control"
+                                    placeholder="Step 3 Title" />
+                                <h6 *ngIf="!isEditingStep3">{{ demo.step3content }}</h6>
+                                <textarea *ngIf="isEditingStep3" [(ngModel)]="demo.step3content" class="form-control"
+                                    placeholder="Step 3 Content"></textarea>
+                            </div>
+                            <div class="button-container d-flex justify-content-between mt-2">
+                                <button nbButton nbStepperPrevious>Prev</button>
+                                <button nbButton nbStepperNext>Next</button>
+                                <div>
+                                    <button nbButton status="primary" *ngIf="isEditingStep3"
+                                        (click)="saveEditStep('step3')">Save</button>
+                                    <button nbButton status="warning" *ngIf="isEditingStep3"
+                                        (click)="cancelEditStep('step3')">Cancel</button>
+                                    <button nbButton status="primary" *ngIf="!isEditingStep3"
+                                        (click)="toggleEditStep('step3')">Edit</button>
+                                </div>
+                            </div>
+                        </nb-step>
+
+                        <nb-step [label]="'Fourth step'">
+                            <div class="step-content">
+                                <h4 *ngIf="!isEditingStep4">{{ demo.step4title }}</h4>
+                                <input *ngIf="isEditingStep4" [(ngModel)]="demo.step4title" class="form-control"
+                                    placeholder="Step 4 Title" />
+                                <h6 *ngIf="!isEditingStep4">{{ demo.step4content }}</h6>
+                                <textarea *ngIf="isEditingStep4" [(ngModel)]="demo.step4content" class="form-control"
+                                    placeholder="Step 4 Content"></textarea>
+                            </div>
+                            <div class="button-container d-flex justify-content-between mt-2">
+                                <button nbButton nbStepperPrevious>Prev</button>
+                                <button nbButton nbStepperFinish>Finish</button>
+                                <div>
+                                    <button nbButton status="primary" *ngIf="isEditingStep4"
+                                        (click)="saveEditStep('step4')">Save</button>
+                                    <button nbButton status="warning" *ngIf="isEditingStep4"
+                                        (click)="cancelEditStep('step4')">Cancel</button>
+                                    <button nbButton status="primary" *ngIf="!isEditingStep4"
+                                        (click)="toggleEditStep('step4')">Edit</button>
+                                </div>
+                            </div>
+                        </nb-step>
+                    </nb-stepper>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limitations and Acceptations Section -->
+        <section id="limitations-acceptations" class="my-4">
             <div class="card mx-auto mb-4">
                 <div class="card-body">
                     <h1 class="card-title">Limitations and Acceptations</h1>
-                    <br><br>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="thead-light">
@@ -221,114 +170,168 @@
                                         sessions.</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="bi bi-check tick"></i> Improves decision-making based on data-driven
-                                        insights.</td>
-                                    <td><i class="bi bi-x-circle error"></i> Depends heavily on thorough data collection
-                                        and analysis.</td>
+                                    <td><i class="bi bi-check tick"></i> Provides a structured approach.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Can be time-consuming.</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="bi bi-check tick"></i> Facilitates resolution of complex problems.
+                                    <td><i class="bi bi-check tick"></i> Encourages team collaboration.</td>
+                                    <td><i class="bi bi-x-circle error"></i> Results may vary based on team experience.
                                     </td>
-                                    <td><i class="bi bi-x-circle error"></i> Can be time-consuming during data
-                                        collection and analysis.</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="bi bi-check tick"></i> Encourages cross-functional collaboration.</td>
-                                    <td><i class="bi bi-x-circle error"></i> Requires regular data updates to remain
-                                        effective.</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="bi bi-check tick"></i> Improves customer satisfaction by identifying
-                                        and eliminating recurring issues.</td>
-                                    <td><i class="bi bi-x-circle error"></i> May not capture all external factors
-                                        influencing a problem.</td>
+                                    <td><i class="bi bi-check tick"></i> Promotes a culture of continuous improvement.
+                                    </td>
+                                    <td><i class="bi bi-x-circle error"></i> Needs continuous follow-up for long-term
+                                        results.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="container mt-5">
-                <div class="card">
-                    <div class="card-body">
-                        <section id="rca-tutorial">
-                            <h2>RCA-Tutoriel</h2>
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <h3>Why</h3>
-                                    <h4 class="expandable">Understanding the root causes allows organizations to
-                                        implement lasting solutions, reducing the likelihood of recurring issues and
-                                        improving overall efficiency. RCA enables a proactive approach to
-                                        problem-solving by focusing on underlying factors rather than just addressing
-                                        symptoms.</h4>
-                                    <span class="show-more">Show more</span>
-                                    <div class="button-container">
-                                        <button nbButton status="primary" (click)="editContent()"
-                                            class="edit-button">Edit</button>
-                                    </div>
-                                </div>
-                                <div class="svg-container">
-                                    <img src="">
-                                </div>
+        </section>
+
+        <!-- RCA Tutorial Section -->
+        <section id="rca-tutorial" class="my-4">
+            <!-- Why Section -->
+            <div class="card mx-auto mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>Why</h3>
+                    <button nbButton status="primary" *ngIf="!isEditingWhy"
+                        (click)="toggleEditTutorial('why')">Edit</button>
+                </div>
+                <div class="card-body">
+                    <div class="content-container1">
+                        <h4 class="expandable">
+                            <span *ngIf="!isEditingWhy">{{ demo.why }}</span>
+                            <quill-editor *ngIf="isEditingWhy" [(ngModel)]="demo.why" [modules]="editorModules"
+                                class="editor"></quill-editor>
+                        </h4>
+                        <span class="show-more" (click)="toggleEditTutorial('why')">
+                            {{ isEditingWhy ? 'Hide' : 'Show more' }}
+                        </span>
+                        <div class="button-container d-flex justify-content-between mt-2">
+                            <div>
+                                <button nbButton status="primary" *ngIf="isEditingWhy"
+                                    (click)="saveContentTutorial('why')" class="me-2">Save</button>
+                                <button nbButton status="warning" *ngIf="isEditingWhy"
+                                    (click)="cancelEditTutorial('why')">Cancel</button>
                             </div>
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <h3>What</h3>
-                                    <h4 class="expandable">{{demo.what}}</h4>
-                                    <span class="show-more">Show more</span>
-                                    <div class="button-container">
-                                        <button nbButton status="primary" (click)="editContent()"
-                                            class="edit-button">Edit</button>
-                                    </div>
-                                </div>
-                                <div class="svg-container">
-
-                                    <img src="">
-
-
-
-                                </div>
-                            </div>
-                            <div class=" card mb-3">
-                                <div class="card-header">
-                                    <h3>How</h3>
-                                    <h4 class="expandable">{{demo.how}}</h4>
-                                    <span class="show-more">Show more</span>
-                                    <div class="button-container">
-                                        <button nbButton status="primary" (click)="editContent()"
-                                            class="edit-button">Edit</button>
-                                    </div>
-                                </div>
-                                <div class="svg-container">
-
-                                    <img src="">
-
-
-                                </div>
-                            </div>
-                            <div class="container mt-5">
-                                <!-- Section What If -->
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h3>What If</h3>
-                                        <h4 class="expandable">{{demo.whatif}}</h4>
-                                        <span class="show-more">Show more</span>
-                                        <div class="button-container">
-                                            <button nbButton status="primary" (click)="editContent()"
-                                                class="edit-button">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                        </div>
                     </div>
+                </div>
+                <div class="svg-container text-center">
+                    <img [src]="" alt="Why Image" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- What Section -->
+            <div class="card mx-auto mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>What</h3>
+                    <button nbButton status="primary" *ngIf="!isEditingWhat"
+                        (click)="toggleEditTutorial('what')">Edit</button>
+                </div>
+                <div class="card-body">
+                    <div class="content-container1">
+                        <h4 class="expandable">
+                            <span *ngIf="!isEditingWhat">{{ demo.what }}</span>
+                            <quill-editor *ngIf="isEditingWhat" [(ngModel)]="demo.what" [modules]="editorModules"
+                                class="editor"></quill-editor>
+                        </h4>
+                        <span class="show-more" (click)="toggleEditTutorial('what')">
+                            {{ isEditingWhat ? 'Hide' : 'Show more' }}
+                        </span>
+                        <div class="button-container d-flex justify-content-between mt-2">
+                            <div>
+                                <button nbButton status="primary" *ngIf="isEditingWhat"
+                                    (click)="saveContentTutorial('what')" class="me-2">Save</button>
+                                <button nbButton status="warning" *ngIf="isEditingWhat"
+                                    (click)="cancelEditTutorial('what')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="svg-container text-center">
+                    <img [src]="imgUrlWhat" alt="What Image" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- How Section -->
+            <div class="card mx-auto mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>How</h3>
+                    <button nbButton status="primary" *ngIf="!isEditingHow"
+                        (click)="toggleEditTutorial('how')">Edit</button>
+                </div>
+                <div class="card-body">
+                    <div class="content-container1">
+                        <h4 class="expandable">
+                            <span *ngIf="!isEditingHow">{{ demo.how }}</span>
+                            <quill-editor *ngIf="isEditingHow" [(ngModel)]="demo.how" [modules]="editorModules"
+                                class="editor"></quill-editor>
+                        </h4>
+                        <span class="show-more" (click)="toggleEditTutorial('how')">
+                            {{ isEditingHow ? 'Hide' : 'Show more' }}
+                        </span>
+                        <div class="button-container d-flex justify-content-between mt-2">
+                            <div>
+                                <button nbButton status="primary" *ngIf="isEditingHow"
+                                    (click)="saveContentTutorial('how')" class="me-2">Save</button>
+                                <button nbButton status="warning" *ngIf="isEditingHow"
+                                    (click)="cancelEditTutorial('how')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="svg-container text-center">
+                    <img [src]="" alt="How Image" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- What If Section -->
+            <div class="card mx-auto mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>What If</h3>
+                    <button nbButton status="primary" *ngIf="!isEditingWhatIf"
+                        (click)="toggleEditTutorial('whatIf')">Edit</button>
+                </div>
+                <div class="card-body">
+                    <div class="content-container1">
+                        <h4 class="expandable">
+                            <span *ngIf="!isEditingWhatIf">{{ demo.whatif }}</span>
+                            <quill-editor *ngIf="isEditingWhatIf" [(ngModel)]="demo.whatif" [modules]="editorModules"
+                                class="editor"></quill-editor>
+                        </h4>
+                        <span class="show-more" (click)="toggleEditTutorial('whatIf')">
+                            {{ isEditingWhatIf ? 'Hide' : 'Show more' }}
+                        </span>
+                        <div class="button-container d-flex justify-content-between mt-2">
+                            <div>
+                                <button nbButton status="primary" *ngIf="isEditingWhatIf"
+                                    (click)="saveContentTutorial('whatIf')" class="me-2">Save</button>
+                                <button nbButton status="warning" *ngIf="isEditingWhatIf"
+                                    (click)="cancelEditTutorial('whatIf')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="svg-container text-center">
+                    <img [src]="" alt="What If Image" class="img-fluid">
                 </div>
             </div>
         </section>
-        <!-- rca-demo.component.html -->
-        <a routerLink="/pages/lean/root-cause-analysis/quizz" class="btn btn-primary me-2">Quizz</a>
+
+
+
+        <!-- Navigation to Quiz -->
+        <div class="text-center mt-4">
+            <a routerLink="/pages/lean/root-cause-analysis/quizz" class="btn btn-primary">Quiz</a>
+        </div>
 
     </div>
+
+
 </body>
 
 </html>

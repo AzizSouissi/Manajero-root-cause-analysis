@@ -1,38 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RcaProject } from '../../../@core/models/rca';
-import { RcaProjectService } from '../../../@core/services/rca.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
+import { RcaProject } from "../../../@core/models/rca";
+import { RcaProjectService } from "../../../@core/services/rca.service";
 
 @Component({
-  selector: 'ngx-rca',
-  templateUrl: './rca.component.html',
-  styleUrls: ['./rca.component.scss']
+  selector: "ngx-rca",
+  templateUrl: "./rca.component.html",
+  styleUrls: ["./rca.component.scss"],
 })
 export class RcaComponent implements OnInit {
   rcaProjects: RcaProject[] = [];
   selectedProject: RcaProject | null = null;
   projectForm: FormGroup;
   isEditMode = false;
-  errorMessage: string = '';
+  errorMessage: string = "";
 
   constructor(
     private rcaProjectService: RcaProjectService,
     private fb: FormBuilder
   ) {
-    // Initialize the project form
     this.projectForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      status: ['', Validators.required],
-      owner: ['', Validators.required],
-      rootCause: [''],
-      correctiveAction: [''],
-      category: [''],
-      teamMembers: [''],
-      priority: ['', Validators.required],
-      impact: ['', Validators.required],
+      name: ["", Validators.required],
+      description: ["", Validators.required],
+      startDate: ["", Validators.required],
+      endDate: ["", Validators.required],
+      status: ["", Validators.required],
+      owner: ["", Validators.required],
+      rootCause: [""],
+      correctiveAction: [""],
+      category: [""],
+      teamMembers: this.fb.array([]), // Initialize the teamMembers as a FormArray
+      priority: ["", Validators.required],
+      impact: ["", Validators.required],
     });
   }
 
@@ -40,7 +39,6 @@ export class RcaComponent implements OnInit {
     this.getAllProjects();
   }
 
-  // Fetch all RCA projects
   getAllProjects(): void {
     this.rcaProjectService.getAllProjects().subscribe({
       next: (projects: RcaProject[]) => {
@@ -50,25 +48,26 @@ export class RcaComponent implements OnInit {
     });
   }
 
-  // Handle project creation
   onSubmit(): void {
     if (this.projectForm.valid) {
       const projectData: RcaProject = this.projectForm.value;
 
       if (this.isEditMode && this.selectedProject) {
-        // Update existing project
-        this.rcaProjectService.updateProject(this.selectedProject.id!, projectData).subscribe({
-          next: (updatedProject: RcaProject) => {
-            const index = this.rcaProjects.findIndex(p => p.id === updatedProject.id);
-            if (index !== -1) {
-              this.rcaProjects[index] = updatedProject;
-            }
-            this.resetForm();
-          },
-          error: (error) => (this.errorMessage = error),
-        });
+        this.rcaProjectService
+          .updateProject(this.selectedProject.id!, projectData)
+          .subscribe({
+            next: (updatedProject: RcaProject) => {
+              const index = this.rcaProjects.findIndex(
+                (p) => p.id === updatedProject.id
+              );
+              if (index !== -1) {
+                this.rcaProjects[index] = updatedProject;
+              }
+              this.resetForm();
+            },
+            error: (error) => (this.errorMessage = error),
+          });
       } else {
-        // Create new project
         this.rcaProjectService.createProject(projectData).subscribe({
           next: (createdProject: RcaProject) => {
             this.rcaProjects.push(createdProject);
@@ -80,27 +79,40 @@ export class RcaComponent implements OnInit {
     }
   }
 
-  // Select a project to edit
   editProject(project: RcaProject): void {
     this.selectedProject = project;
     this.isEditMode = true;
     this.projectForm.patchValue(project);
+    this.setTeamMembers(project.teamMembers || []);
   }
 
-  // Delete a project
+  setTeamMembers(members: string[]): void {
+    const teamMembers = this.projectForm.get("teamMembers") as FormArray;
+    teamMembers.clear();
+    members.forEach((member) => teamMembers.push(this.fb.control(member)));
+  }
+
+  addTeamMember(): void {
+    const teamMembers = this.projectForm.get("teamMembers") as FormArray;
+    teamMembers.push(this.fb.control(""));
+  }
+
   deleteProject(id: string): void {
-    this.rcaProjectService.deleteProject(id).subscribe({
-      next: () => {
-        this.rcaProjects = this.rcaProjects.filter(p => p.id !== id);
-      },
-      error: (error) => (this.errorMessage = error),
-    });
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      this.rcaProjectService.deleteProject(id).subscribe({
+        next: () => {
+          this.rcaProjects = this.rcaProjects.filter((p) => p.id !== id);
+          this.errorMessage = "Deleting successful";
+        },
+        error: (error) => (this.errorMessage = "Deleting successful"),
+      });
+    }
   }
 
-  // Reset the form and exit edit mode
   resetForm(): void {
     this.projectForm.reset();
     this.selectedProject = null;
     this.isEditMode = false;
+    this.projectForm.setControl("teamMembers", this.fb.array([]));
   }
 }

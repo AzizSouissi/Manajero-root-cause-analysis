@@ -1,24 +1,32 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Chart, ChartTypeRegistry } from 'chart.js';
-import { RcaProject } from '../../../@core/models/rca';
-import { RcaProjectService } from '../../../@core/services/rca.service';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
+import { Chart } from "chart.js";
+import { RcaProject } from "../../../@core/models/rca";
+import { RcaProjectService } from "../../../@core/services/rca.service";
 
 @Component({
-  selector: 'ngx-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "ngx-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild('pieChart', { static: true }) pieChartCanvas!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('barChart', { static: true }) barChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild("pieChart", { static: true })
+  pieChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild("barChart", { static: true })
+  barChartCanvas!: ElementRef<HTMLCanvasElement>;
 
-  chartPie: Chart<'pie', number[], string> | undefined;
-  chartBar: Chart<'bar', number[], string> | undefined;
+  chartPie: Chart<"pie", number[], string> | undefined;
+  chartBar: Chart<"bar", number[], string> | undefined;
 
   rcaProjects: RcaProject[] = [];
-  errorMessage: string = '';
+  errorMessage: string = "";
 
-  constructor(private rcaProjectService: RcaProjectService) { }
+  constructor(private rcaProjectService: RcaProjectService) {}
 
   ngOnInit(): void {
     this.getAllProjects();
@@ -41,16 +49,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   createCharts(): void {
     this.destroyCharts(); // Destroy existing charts if any
 
+    // Process data for pie chart
     const statusCounts = this.rcaProjects.reduce((acc, project) => {
-      acc[project.status] = (acc[project.status] || 0) + 1;
+      const status = project.status || "Unknown"; // Default to 'Unknown' if status is null/undefined
+      acc[status] = (acc[status] || 0) + 1;
       return acc;
     }, {} as { [key: string]: number });
 
     const statusLabels = Object.keys(statusCounts);
     const statusData = Object.values(statusCounts);
 
+    // Process data for bar chart
     const priorityCounts = this.rcaProjects.reduce((acc, project) => {
-      acc[project.priority] = (acc[project.priority] || 0) + 1;
+      const priority = project.priority || "Unknown"; // Default to 'Unknown' if priority is null/undefined
+      acc[priority] = (acc[priority] || 0) + 1;
       return acc;
     }, {} as { [key: string]: number });
 
@@ -59,62 +71,66 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Pie Chart
     if (this.pieChartCanvas) {
-      this.chartPie = new Chart<'pie', number[], string>(this.pieChartCanvas.nativeElement, {
-        type: 'pie',
+      this.chartPie = new Chart(this.pieChartCanvas.nativeElement, {
+        type: "pie",
         data: {
           labels: statusLabels,
-          datasets: [{
-            data: statusData,
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          }]
+          datasets: [
+            {
+              data: statusData,
+              backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+            },
+          ],
         },
         options: {
           responsive: true,
           plugins: {
             legend: {
-              position: 'top',
+              position: "top",
             },
             tooltip: {
               callbacks: {
-                label: function (context) {
-                  let label = context.label || '';
-                  if (context.parsed !== null) {
-                    label += ': ' + context.parsed + ' projects';
+                label: (context) => {
+                  let label = context.label || "";
+                  if (context.parsed) {
+                    label += `: ${context.parsed} projects`;
                   }
                   return label;
-                }
-              }
-            }
-          }
-        }
+                },
+              },
+            },
+          },
+        },
       });
     }
 
     // Bar Chart
     if (this.barChartCanvas) {
-      this.chartBar = new Chart<'bar', number[], string>(this.barChartCanvas.nativeElement, {
-        type: 'bar',
+      this.chartBar = new Chart(this.barChartCanvas.nativeElement, {
+        type: "bar",
         data: {
           labels: priorityLabels,
-          datasets: [{
-            label: 'Number of Projects by Priority',
-            data: priorityData,
-            backgroundColor: '#42A5F5',
-            borderColor: '#1E88E5',
-            borderWidth: 1,
-          }]
+          datasets: [
+            {
+              label: "Number of Projects by Priority",
+              data: priorityData,
+              backgroundColor: "#42A5F5",
+              borderColor: "#1E88E5",
+              borderWidth: 1,
+            },
+          ],
         },
         options: {
           responsive: true,
           scales: {
             x: {
-              beginAtZero: true
+              beginAtZero: true,
             },
             y: {
-              beginAtZero: true
-            }
-          }
-        }
+              beginAtZero: true,
+            },
+          },
+        },
       });
     }
   }

@@ -1,7 +1,6 @@
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col-md-12 text-center">
-            <!-- Navigation Buttons -->
             <a routerLink="/pages/lean/root-cause-analysis/dash" class="btn btn-primary me-2">Dashboard</a>
             <a routerLink="/pages/lean/root-cause-analysis" class="btn btn-secondary">Back to Demo</a>
         </div>
@@ -11,12 +10,10 @@
         <div class="col-md-8 offset-md-2">
             <h2 class="text-center mb-4">{{ isEditMode ? 'Edit Project' : 'Create New Project' }}</h2>
 
-            <!-- Error Message Display -->
             <div *ngIf="errorMessage" class="alert alert-danger">
                 {{ errorMessage }}
             </div>
 
-            <!-- Project Form for Adding/Editing -->
             <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
                 <!-- Project Name -->
                 <div class="form-group mb-3">
@@ -105,10 +102,15 @@
                 </div>
 
                 <!-- Team Members -->
-                <div class="form-group mb-3">
-                    <label for="teamMembers">Team Members</label>
-                    <input type="text" id="teamMembers" class="form-control" formControlName="teamMembers"
-                        placeholder="Enter team members" />
+                <div formArrayName="teamMembers" class="mb-3">
+                    <label>Team Members</label>
+                    <div *ngFor="let member of projectForm.get('teamMembers')?.controls; let i = index">
+                        <input [formControlName]="i" type="text" class="form-control mb-2"
+                            placeholder="Enter team member name" />
+                    </div>
+                    <button type="button" class="btn btn-info" (click)="addTeamMember()">
+                        Add Team Member
+                    </button>
                 </div>
 
                 <!-- Form Buttons -->
